@@ -3,6 +3,7 @@ package com.krong.structure.non_linear;
 import com.krong.structure.non_linear.vo.TreeNode;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
 
 public class BinaryTree {
@@ -29,6 +30,81 @@ public class BinaryTree {
 
         return current;
     }
+
+    private TreeNode<Integer> add(TreeNode<Integer> current, TreeNode<Integer> prevNode) {
+        if(current == null) {
+            return prevNode;
+        }
+
+        if(current.getValue() < prevNode.getValue()) {
+            current.setRight(add(current.getRight(), prevNode));
+        } else {
+            current.setLeft(add(current.getLeft(), prevNode));
+        }
+
+        return current;
+    }
+
+    public void remove(Integer value) {
+        root = remove(root, value);
+    }
+
+    private TreeNode<Integer> remove(TreeNode<Integer> current, Integer value) {
+        if(current == null) return null;
+
+        if(!Objects.equals(current.getValue(), value)) {
+            current.setLeft(remove(current.getLeft(), value));
+            current.setRight(remove(current.getRight(), value));
+            return current;
+        }
+
+        // Leaf일 때 삭제
+        if(current.getRight() == null && current.getLeft() == null)
+            return null;
+
+        if(current.getLeft() == null) return current.getRight();
+        if(current.getRight() == null) return current.getLeft();
+
+//        // 중위 전임자(In-order Predecessor)
+//        TreeNode<Integer> predecessor = predecessor(current.getLeft());
+//        predecessor.setRight(current.getRight());
+//        if(current.getLeft() != null)
+//           add(predecessor, current.getLeft());
+//        return predecessor;
+
+        // 중위 후속자(In-order Successor)
+        TreeNode<Integer> successor = successor(current.getRight());
+        successor.setLeft(current.getLeft());
+        if(current.getRight() != null)
+            add(successor, current.getRight());
+
+        return successor;
+
+    }
+
+    // 중위 전임자(In-order Predecessor): 삭제할 노드의 왼쪽 서브트리에서 가장 큰 값을 가진 노드.
+    private TreeNode<Integer> predecessor(TreeNode<Integer> current) {
+        if(current.getRight() == null)
+            return current;
+
+        TreeNode<Integer> predecessor =  predecessor(current.getRight());
+        if(Objects.equals(current.getRight().getValue(), predecessor.getValue()))
+            current.setRight(null);
+
+        return predecessor;
+    }
+
+    // 중위 후속자(In-order Successor): 삭제할 노드의 오른쪽 서브트리에서 가장 작은 값을 가진 노드.
+    private TreeNode<Integer> successor(TreeNode<Integer> current) {
+        if(current.getLeft() == null)
+            return current;
+
+        TreeNode<Integer> successor =  successor(current.getLeft());
+        if(Objects.equals(current.getLeft().getValue(), successor.getValue()))
+            current.setLeft(null);
+        return successor;
+    }
+
 
     // 전위 순회 (Pre-order Traversal) 출력 메서드
     public void traversePreOrder(TreeNode<Integer> node) {
@@ -79,9 +155,12 @@ public class BinaryTree {
         bt.add(2);
         bt.add(3);
         bt.add(1);
+        bt.add(0);
         bt.add(7);
         bt.add(8);
         bt.add(6);
+
+        bt.remove(5);
 
         // 순회 결과 출력
         System.out.print("Pre-order traversal:");
