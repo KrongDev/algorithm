@@ -8,6 +8,7 @@
 목차
 1. Algorithm
    - [Sort](./src/main/java/com/krong/sort/README.md)
+   - [Greedy](./src/main/java/com/krong/greedy/README.md)
 3. STRUCTURE
    - [Linear](./src/main/java/com/krong/structure/linear)
    - [Non-Linear](./src/main/java/com/krong/structure/non_linear)
