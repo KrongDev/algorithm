@@ -7,9 +7,9 @@
 
 목차
 1. Algorithm
-   - [Sort](./src/main/java/com/krong/sort/README.md)
-   - [Greedy](./src/main/java/com/krong/greedy/README.md)
-   - [Two Pointer](./src/main/java/com/krong/twoPointer/README.md)
+   - [Sort](./src/main/java/com/krong/algorithm/sort/README.md)
+   - [Greedy](./src/main/java/com/krong/algorithm/greedy/README.md)
+   - [Two Pointer](./src/main/java/com/krong/algorithm/twoPointer/README.md)
 3. STRUCTURE
    - [Linear](./src/main/java/com/krong/structure/linear)
    - [Non-Linear](./src/main/java/com/krong/structure/non_linear)

@@ -1,4 +1,4 @@
-package com.krong.sort;
+package com.krong.algorithm.sort;
 
 public abstract class Sort {
     //

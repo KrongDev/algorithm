@@ -1,4 +1,4 @@
-package com.krong.twoPointer;
+package com.krong.algorithm.twoPointer;
 
 import java.util.Arrays;
 

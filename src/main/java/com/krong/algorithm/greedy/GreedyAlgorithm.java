@@ -1,4 +1,4 @@
-package com.krong.greedy;
+package com.krong.algorithm.greedy;
 
 import java.util.Arrays;
 
